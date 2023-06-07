@@ -40,6 +40,8 @@ class NewFlashCardAction
      */
     public function execute($question, $answer, $caseSensitive): FlashCard
     {
+        $question = trim($question);
+        $answer = trim($answer);
         $caseSensitive = $caseSensitive == 'yes';
         return $this->flashcardRepository->createFlashcard($question, $answer, $caseSensitive);
     }
