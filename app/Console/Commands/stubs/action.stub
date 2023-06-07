@@ -2,6 +2,12 @@
 
 namespace DummyNamespace;
 
+/**
+ * Action Class
+ *
+ * @author Farshid Mehrtash
+ * @version 1.0.0
+ */
 class DummyClass
 {
     /**
@@ -18,6 +24,8 @@ class DummyClass
      * Execute the action.
      *
      * @return void
+     * @author Farshid Mehrtash
+     * @version 1.0.0
      */
     public function execute()
     {
