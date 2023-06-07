@@ -15,6 +15,7 @@ return [
     'flashcard_answer' => 'Enter the flashcard answer',
     'flashcard_case_sensitive' => 'Is the answer case sensitive? (yes/no)',
     'flashcard_created' => 'Flashcard created successfully! (ID: :id)',
+    'flashcard_already_exists' => 'Flashcard with this question already exists. (ID: :id)',
     'flashcard_table_id' => 'ID',
     'flashcard_table_question' => 'Question',
     'flashcard_table_answer' => 'Answer',
