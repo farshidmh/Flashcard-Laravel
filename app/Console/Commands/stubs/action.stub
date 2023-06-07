@@ -4,23 +4,23 @@ namespace DummyNamespace;
 
 class DummyClass
 {
-  /**
-   * Create the action.
-   *
-   * @return void
-   */
-  public function __construct()
-  {
+    /**
+     * Create the action.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
 
-  }
+    }
 
-  /**
-   * Execute the action.
-   *
-   * @return void
-   */
-  public function execute()
-  {
+    /**
+     * Execute the action.
+     *
+     * @return void
+     */
+    public function execute()
+    {
 
-  }
+    }
 }
