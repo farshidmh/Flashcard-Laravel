@@ -28,50 +28,59 @@ class InteractiveFlashcardCommand extends Command
      */
     public function handle()
     {
-        $this->info("Welcome to the Flashcard practice program!");
+        $this->info(__('flashcards.welcome'));
+        $this->line(__('================'));
         $this->displayMainMenu();
         return CommandAlias::SUCCESS;
     }
 
-    private function displayMainMenu()
+    private function displayOptions(): void
+    {
+        $this->line('---------');
+        $this->info(__("flashcards.main_menu"));
+        $this->line('---------');
+        $this->info('1. ' . __("flashcards.create_flashcard"));
+        $this->info('2. ' . __("flashcards.list_flashcards"));
+        $this->info('3. ' . __("flashcards.practice_flashcards"));
+        $this->info('4. ' . __("flashcards.stats"));
+        $this->info('5. ' . __("flashcards.reset"));
+        $this->info('6. ' . __("flashcards.exit"));
+        $this->line('---------');
+    }
+
+    private function choiceRunner($choice)
+    {
+        switch ($choice) {
+            case '1':
+                $this->call('flashcard:create');
+                break;
+            case '2':
+                $this->listFlashcards();
+                break;
+            case '3':
+                $this->practiceFlashcards();
+                break;
+            case '4':
+                $this->displayStats();
+                break;
+            case '5':
+                $this->resetProgress();
+                break;
+            case '6':
+                $this->info(__("flashcards.exit_program"));
+                break;
+            default:
+                $this->error(__("flashcards.invalid_choice"));
+        }
+    }
+
+    private function displayMainMenu(): void
     {
         $choice = '';
         while ($choice !== '6') {
-            $this->info(__("flashcards.main_menu"));
-            $this->info('---------');
-            $this->info('1. ' . __("flashcards.create_flashcard"));
-            $this->info('2. ' . __("flashcards.list_flashcards"));
-            $this->info('3. ' . __("flashcards.practice_flashcards"));
-            $this->info('4. ' . __("flashcards.stats"));
-            $this->info('5. ' . __("flashcards.reset"));
-            $this->info('6. ' . __("flashcards.exit"));
-
+            $this->displayOptions();
             $choice = $this->ask(__("flashcards.enter_choice"));
-
-            switch ($choice) {
-                case '1':
-                     $this->createFlashcard();
-                    break;
-                case '2':
-                     $this->listFlashcards();
-                    break;
-                case '3':
-                     $this->practiceFlashcards();
-                    break;
-                case '4':
-                     $this->displayStats();
-                    break;
-                case '5':
-                    $this->resetProgress();
-                    break;
-                case '6':
-                    $this->info(__("flashcards.exit_program"));
-                    break;
-                default:
-                    $this->error(__("flashcards.invalid_choice"));
-            }
-
-            $this->line('');
+            $this->choiceRunner($choice);
         }
     }
 
@@ -88,10 +97,6 @@ class InteractiveFlashcardCommand extends Command
     }
 
     private function listFlashcards()
-    {
-    }
-
-    private function createFlashcard()
     {
     }
 }
