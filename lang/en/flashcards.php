@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'welcome' => 'Welcome to the Flashcard practice program!',
     'main_menu' => 'Main Menu',
     'create_flashcard' => 'Create a flashcard',
     'list_flashcards' => 'List all flashcards',
@@ -12,7 +13,8 @@ return [
     'enter_choice' => 'Enter your choice (1-6)',
     'flashcard_question' => 'Enter the flashcard question',
     'flashcard_answer' => 'Enter the flashcard answer',
-    'flashcard_created' => 'Flashcard created successfully!',
+    'flashcard_case_sensitive' => 'Is the answer case sensitive? (yes/no)',
+    'flashcard_created' => 'Flashcard created successfully! (ID: :id)',
     'flashcard_table_id' => 'ID',
     'flashcard_table_question' => 'Question',
     'flashcard_table_answer' => 'Answer',
