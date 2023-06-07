@@ -32,4 +32,15 @@ class EloquentFlashCardRepository implements FlashcardRepository
         ]);
     }
 
+    /**
+     * This method creates a fetches a flashcard by its question from the database layer to the service layer (action).
+     * @param $question
+     * @return FlashCard|null
+     * @version 1.0.0
+     */
+    public function getFlashCardByQuestion($question): FlashCard|null
+    {
+        return FlashCard::where('question', $question)->first();
+    }
+
 }

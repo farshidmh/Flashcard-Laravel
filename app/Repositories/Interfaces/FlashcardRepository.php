@@ -22,5 +22,12 @@ interface FlashcardRepository
      */
     public function createFlashcard($question, $answer, $caseSensitive): FlashCard;
 
+    /**
+     * This is the template method for fetching a flashcard by its question.
+     * @param $question
+     * @return FlashCard|null
+     * @version 1.0.0
+     */
+    public function getFlashCardByQuestion($question): FlashCard|null;
 
 }
