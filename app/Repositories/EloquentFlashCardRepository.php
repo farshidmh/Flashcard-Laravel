@@ -53,4 +53,35 @@ class EloquentFlashCardRepository implements FlashcardRepository
     {
         return FlashCard::all();
     }
+
+
+    /**
+     * This is the method for fetching a flashcard by its ID.
+     * @param $flashCardID
+     * @return FlashCard
+     */
+    public function getFlashCardByID($flashCardID): FlashCard
+    {
+        return FlashCard::findOrFail($flashCardID);
+    }
+
+    /**
+     * This is the  method for submitting a flashcard answer.
+     * @param $flashCardID
+     * @param $answer
+     * @param $status
+     * @param $userId
+     * @return void
+     */
+    public function submitFlashCardAnswer($flashCardID, $answer, $status, $userId): void
+    {
+        $flashCard = $this->getFlashCardByID($flashCardID);
+
+        $flashCard->userFlashCardAnswers()->create([
+            'user_id' => $userId,
+            'answer' => $answer,
+            'status' => $status,
+        ]);
+
+    }
 }

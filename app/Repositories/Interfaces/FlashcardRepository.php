@@ -38,4 +38,21 @@ interface FlashcardRepository
      */
     public function getAllFlasshCards(): Collection;
 
+    /**
+     * This is the template method for fetching a flashcard by its ID.
+     * @param $flashCardID
+     * @return FlashCard
+     */
+    public function getFlashCardByID($flashCardID): FlashCard;
+
+    /**
+     * This is the template method for submitting a flashcard answer.
+     * @param $flashCardID
+     * @param $answer
+     * @param $status
+     * @param $userId
+     * @return void
+     */
+    public function submitFlashCardAnswer($flashCardID, $answer, $status, $userId): void;
+
 }
