@@ -44,8 +44,10 @@ return [
     'incorrect' => 'Incorrect',
     'not_answered' => 'Not answered',
     'progress_completion' => 'Progress completion: :percentage%',
-    'practice_more' => 'Do you want to practice more? (yes/no)',
+    'practice_more' => 'Do you want to practice more?',
     'flashcard_not_found' => 'Flashcard not found.',
     'exit_with_zero'=>'Enter 0 to exit.',
     'going_back'=>'Enter 0 to exit.',
+    'initializing'=>'Initializing the database for the first time...',
+    'initialize_done'=>'Initialization done.'
 ];
