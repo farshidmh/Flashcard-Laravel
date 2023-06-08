@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\GetMigrationStatus;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Command\Command as CommandAlias;
 
@@ -26,10 +27,23 @@ class InteractiveFlashcardCommand extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(
+        GetMigrationStatus $getMigrationStatus
+    )
     {
+
+        try {
+            $getMigrationStatus->execute();
+        } catch (\Throwable) {
+            $this->info(__('flashcards.initializing'));
+            $this->call('migrate');
+            $this->call('db:seed');
+            $this->info(__('flashcards.initialize_done'));
+            $this->line('================');
+        }
+
         $this->info(__('flashcards.welcome'));
-        $this->line(__('================'));
+        $this->line('================');
         $this->displayMainMenu();
         return CommandAlias::SUCCESS;
     }
@@ -76,6 +90,8 @@ class InteractiveFlashcardCommand extends Command
 
     private function displayMainMenu(): void
     {
+
+
         $choice = '';
         while ($choice !== '6') {
             $this->displayOptions();
