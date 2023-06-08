@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * This class is responsible for getting the migration status of a flashcard set.
+ * TODO: Move the db query to a repository.
  *
  *
  *
