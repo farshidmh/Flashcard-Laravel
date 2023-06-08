@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Actions\CalculateCompletionPercentageAction;
+use App\Actions\getPercentageFlashcardWithCorrectAnswerAction;
 use App\Actions\GetAllFlashCardsAndUsersAnswerAction;
 use App\Actions\GetFlashCardByIdAction;
 use App\Actions\SubmitFlashCardAnswerAction;
@@ -36,10 +36,10 @@ class PracticeFlashcardCommand extends Command
      * @return int
      */
     public function handle(
-        CalculateCompletionPercentageAction  $calculateCompletionPercentageAction,
-        GetAllFlashCardsAndUsersAnswerAction $getAllFlashCards,
-        GetFlashCardByIdAction               $getFlashCardById,
-        SubmitFlashCardAnswerAction          $submitFlashCardAnswer,
+        getPercentageFlashcardWithCorrectAnswerAction $calculateCompletionPercentageAction,
+        GetAllFlashCardsAndUsersAnswerAction          $getAllFlashCards,
+        GetFlashCardByIdAction                        $getFlashCardById,
+        SubmitFlashCardAnswerAction                   $submitFlashCardAnswer,
 
     )
     {
