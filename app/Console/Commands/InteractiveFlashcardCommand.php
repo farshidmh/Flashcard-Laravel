@@ -55,16 +55,16 @@ class InteractiveFlashcardCommand extends Command
                 $this->call('flashcard:create');
                 break;
             case '2':
-               $this->call('flashcard:getAll');
+                $this->call('flashcard:getAll');
                 break;
             case '3':
-                $this->practiceFlashcards();
+                $this->call('flashcard:practice');
                 break;
             case '4':
                 $this->displayStats();
                 break;
             case '5':
-                $this->resetProgress();
+                $this->call('flashcard:reset');
                 break;
             case '6':
                 $this->info(__("flashcards.exit_program"));
@@ -84,16 +84,7 @@ class InteractiveFlashcardCommand extends Command
         }
     }
 
-    private function resetProgress()
-    {
-    }
-
     private function displayStats()
     {
     }
-
-    private function practiceFlashcards()
-    {
-    }
-
 }
