@@ -141,4 +141,24 @@ class EloquentFlashCardRepository implements FlashcardRepository
     {
         return FlashCardAnswer::where('flash_card_id', $flashcardID)->where('user_id', $userID)->first();
     }
+
+    /**
+     * Template method for getting user answers .
+     * @param $userID
+     * @return Collection
+     */
+    public function getFlashCardAnswersByUser($userID): Collection
+    {
+        return FlashCardAnswer::where('user_id', $userID)->get();
+    }
+
+    /**
+     * Template method for getting user correct answers.
+     * @param $userID
+     * @return Collection
+     */
+    public function getFlashCardCorrectAnswersByUser($userID): Collection
+    {
+        return FlashCardAnswer::where('user_id', $userID)->where('status', 1)->get();
+    }
 }

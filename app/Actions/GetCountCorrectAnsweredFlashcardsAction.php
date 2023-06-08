@@ -5,13 +5,12 @@ namespace App\Actions;
 use App\Repositories\Interfaces\FlashcardRepository;
 
 /**
- * This class is responsible for getting count of flashcards.
- *
+ * This class is responsible for calculating number of user's correct answers.
  *
  * @author Farshid Mehrtash
  * @version 1.0.0
  */
-class GetFlashCardCountAction
+class GetCountCorrectAnsweredFlashcardsAction
 {
     private FlashcardRepository $flashcardRepository;
 
@@ -26,15 +25,16 @@ class GetFlashCardCountAction
     }
 
     /**
-     * This method is responsible for getting count of flashcards.
+     * Calculating number of user's correct answers.
      *
+     * @param $userId
      * @return int
      *
      * @author Farshid Mehrtash
      * @version 1.0.0
      */
-    public function execute(): int
+    public function execute($userId): int
     {
-        return $this->flashcardRepository->getFlashCardsCount();
+        return $this->flashcardRepository->getFlashCardCorrectAnswersByUser($userId)->count();
     }
 }

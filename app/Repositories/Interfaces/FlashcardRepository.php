@@ -91,5 +91,20 @@ interface FlashcardRepository
      */
     public function getFlashCardAnswerUser($flashcardID,$userID): FlashCardAnswer|null;
 
+    /**
+     * Template method for getting user answers.
+     * @param $userID
+     * @return Collection
+     */
+    public function getFlashCardAnswersByUser($userID): Collection;
+
+    /**
+     * Template method for getting user correct answers.
+     * @param $userID
+     * @return Collection
+     */
+    public function getFlashCardCorrectAnswersByUser($userID): Collection;
+
+
 
 }
