@@ -55,7 +55,7 @@ class InteractiveFlashcardCommand extends Command
                 $this->call('flashcard:create');
                 break;
             case '2':
-                $this->listFlashcards();
+               $this->call('flashcard:getAll');
                 break;
             case '3':
                 $this->practiceFlashcards();
@@ -96,7 +96,4 @@ class InteractiveFlashcardCommand extends Command
     {
     }
 
-    private function listFlashcards()
-    {
-    }
 }
