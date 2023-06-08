@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\FlashCard;
+use App\Models\FlashCardAnswer;
 use App\Repositories\Interfaces\FlashcardRepository;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -97,8 +98,18 @@ class EloquentFlashCardRepository implements FlashcardRepository
             $join->on('flash_cards.id', '=', 'flash_card_answers.flash_card_id')
                 ->where('flash_card_answers.user_id', '=', $userID);
         })
-            ->select('flash_cards.id', 'flash_cards.question', 'flash_card_answers.status as answer_status','flash_card_answers.answer as user_answer')
+            ->select('flash_cards.id', 'flash_cards.question', 'flash_card_answers.status as answer_status', 'flash_card_answers.answer as user_answer')
             ->orderBy('flash_cards.id')
             ->get();
+    }
+
+    /**
+     * This is the  method for delete all flashcards' users' answers.
+     * @param $userID
+     * @return void
+     */
+    public function deleteAllFlashCardUserAnswer($userID): void
+    {
+        FlashCardAnswer::where('user_id', $userID)->delete();
     }
 }
