@@ -58,7 +58,7 @@ class ResetFlashcardCommand extends Command
                     $this->info(__("flashcards.reset_answer_success"));
                     break;
                 case 2:
-                    $deleteAllFlashCardAction->execute($this->userId);
+                    $deleteAllFlashCardAction->execute();
                     $this->info(__("flashcards.reset_all_success"));
                     break;
                 case 3:
