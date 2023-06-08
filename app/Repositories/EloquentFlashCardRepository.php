@@ -97,7 +97,7 @@ class EloquentFlashCardRepository implements FlashcardRepository
             $join->on('flash_cards.id', '=', 'flash_card_answers.flash_card_id')
                 ->where('flash_card_answers.user_id', '=', $userID);
         })
-            ->select('flash_cards.id', 'flash_cards.question', 'flash_card_answers.status as answer_status')
+            ->select('flash_cards.id', 'flash_cards.question', 'flash_card_answers.status as answer_status','flash_card_answers.answer as user_answer')
             ->orderBy('flash_cards.id')
             ->get();
     }
