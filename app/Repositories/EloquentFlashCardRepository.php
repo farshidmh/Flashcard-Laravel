@@ -112,4 +112,14 @@ class EloquentFlashCardRepository implements FlashcardRepository
     {
         FlashCardAnswer::where('user_id', $userID)->delete();
     }
+
+    /**
+     * This is the method for delete all flashcards.
+     * @param $userID
+     * @return void
+     */
+    public function deleteAllFlashCards($userID): void
+    {
+        FlashCard::query()->delete();
+    }
 }

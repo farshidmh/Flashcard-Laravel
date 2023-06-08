@@ -69,5 +69,13 @@ interface FlashcardRepository
      */
     public function deleteAllFlashCardUserAnswer($userID): void;
 
+    /**
+     * This is the template method for delete all flashcards.
+     * @param $userID
+     * @return void
+     */
+    public function deleteAllFlashCards($userID): void;
+
+
 
 }
