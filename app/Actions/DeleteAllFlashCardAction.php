@@ -28,14 +28,13 @@ class DeleteAllFlashCardAction
     /**
      * This method is responsible for deleting all flashcards from the database.
      *
-     * @param $userId
      * @return void
      *
      * @author Farshid Mehrtash
      * @version 1.0.0
      */
-    public function execute($userId): void
+    public function execute(): void
     {
-        $this->flashcardRepository->deleteAllFlashCards($userId);
+        $this->flashcardRepository->deleteAllFlashCards();
     }
 }
