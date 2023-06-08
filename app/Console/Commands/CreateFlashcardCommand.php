@@ -46,9 +46,7 @@ class CreateFlashcardCommand extends Command
             }
 
             $this->line(__('================'));
-            $createNewQuestion = $this->confirm("Do you want to create another flashcard?", true);
-
-        } while ($createNewQuestion);
+        } while ($this->confirm("Do you want to create another flashcard?", true));
 
         return CommandAlias::SUCCESS;
     }
