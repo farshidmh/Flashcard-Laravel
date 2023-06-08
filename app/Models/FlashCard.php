@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class FlashCard extends Model
 {
-    use HasFactory;
 
     protected $fillable = [
         'question',
