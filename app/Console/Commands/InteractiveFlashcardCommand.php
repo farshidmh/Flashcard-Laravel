@@ -75,7 +75,7 @@ class InteractiveFlashcardCommand extends Command
                 $this->call('flashcard:practice');
                 break;
             case '4':
-                $this->displayStats();
+                $this->call('flashcard:stats');
                 break;
             case '5':
                 $this->call('flashcard:reset');
@@ -90,8 +90,6 @@ class InteractiveFlashcardCommand extends Command
 
     private function displayMainMenu(): void
     {
-
-
         $choice = '';
         while ($choice !== '6') {
             $this->displayOptions();
@@ -100,7 +98,4 @@ class InteractiveFlashcardCommand extends Command
         }
     }
 
-    private function displayStats()
-    {
-    }
 }

@@ -122,4 +122,13 @@ class EloquentFlashCardRepository implements FlashcardRepository
     {
         FlashCard::query()->delete();
     }
+
+    /**
+     * This is the method for getting count of all flashcards.
+     * @return int
+     */
+    public function getFlashCardsCount(): int
+    {
+        return FlashCard::count();
+    }
 }

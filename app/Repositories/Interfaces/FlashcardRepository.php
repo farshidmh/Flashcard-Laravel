@@ -76,6 +76,11 @@ interface FlashcardRepository
      */
     public function deleteAllFlashCards($userID): void;
 
+    /**
+     * This is the template method for getting count of all flashcards.
+     * @return int
+     */
+    public function getFlashCardsCount(): int;
 
 
 }
