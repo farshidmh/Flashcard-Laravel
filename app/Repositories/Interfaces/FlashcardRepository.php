@@ -3,6 +3,7 @@
 namespace App\Repositories\Interfaces;
 
 use App\Models\FlashCard;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * This interface is responsible for managing the flashcard repository contract.
@@ -29,5 +30,12 @@ interface FlashcardRepository
      * @version 1.0.0
      */
     public function getFlashCardByQuestion($question): FlashCard|null;
+
+    /**
+     * This is the template method for fetching all flashcards.
+     * @return Collection
+     * @version 1.0.0
+     */
+    public function getAllFlasshCards(): Collection;
 
 }

@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\FlashCard;
 use App\Repositories\Interfaces\FlashcardRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * This class is responsible for managing the flashcard repository.
@@ -43,4 +44,13 @@ class EloquentFlashCardRepository implements FlashcardRepository
         return FlashCard::where('question', $question)->first();
     }
 
+    /**
+     * This is the method for fetching all flashcards.
+     * @return Collection
+     * @version 1.0.0
+     */
+    public function getAllFlasshCards(): Collection
+    {
+        return FlashCard::all();
+    }
 }
