@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\GetFlashCardAnswerByUserAction;
 use App\Actions\getPercentageFlashcardWithCorrectAnswerAction;
 use App\Actions\GetAllFlashCardsAndUsersAnswerAction;
 use App\Actions\GetFlashCardByIdAction;
@@ -40,6 +41,7 @@ class PracticeFlashcardCommand extends Command
         GetAllFlashCardsAndUsersAnswerAction          $getAllFlashCards,
         GetFlashCardByIdAction                        $getFlashCardById,
         SubmitFlashCardAnswerAction                   $submitFlashCardAnswer,
+        GetFlashCardAnswerByUserAction                $getFlashCardAnswerByUserAction,
 
     )
     {
@@ -50,12 +52,17 @@ class PracticeFlashcardCommand extends Command
 
             $flashcardId = $this->ask(__('flashcards.practice_flash_card_id'));
 
-            if($flashcardId == 0) {
+            if ($flashcardId == 0) {
                 break;
             }
 
             try {
                 $flashcard = $getFlashCardById->execute($flashcardId);
+
+                if (!is_null($getFlashCardAnswerByUserAction->execute($flashcardId, $this->userId))) {
+                    $this->error(__('flashcards.already_answered'));
+                    continue;
+                }
 
                 $answer = $this->ask($flashcard->question . ($flashcard->answer_case_sensitive ? ' (case sensitive)' : ''));
 
@@ -73,7 +80,7 @@ class PracticeFlashcardCommand extends Command
             } catch (\Exception $e) {
                 $this->error(__('flashcards.flashcard_not_found'));
             }
-        } while ($this->confirm(__('flashcards.practice_more'),true));
+        } while ($this->confirm(__('flashcards.practice_more'), true));
 
         return CommandAlias::SUCCESS;
     }

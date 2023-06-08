@@ -131,4 +131,15 @@ class EloquentFlashCardRepository implements FlashcardRepository
     {
         return FlashCard::count();
     }
+
+    /**
+     * Method for getting user answer for a flashcard.
+     * @param $flashcardID
+     * @param $userID
+     * @return FlashCardAnswer|null
+     */
+    public function getFlashCardAnswerUser($flashcardID, $userID): FlashCardAnswer|null
+    {
+        return FlashCardAnswer::where('flash_card_id', $flashcardID)->where('user_id', $userID)->first();
+    }
 }

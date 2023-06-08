@@ -3,6 +3,7 @@
 namespace App\Repositories\Interfaces;
 
 use App\Models\FlashCard;
+use App\Models\FlashCardAnswer;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
@@ -81,6 +82,15 @@ interface FlashcardRepository
      * @return int
      */
     public function getFlashCardsCount(): int;
+
+
+    /**
+     * Template method for getting user answer for a flashcard.
+     * @param $flashcardID
+     * @param $userID
+     * @return FlashCardAnswer|null
+     */
+    public function getFlashCardAnswerUser($flashcardID,$userID): FlashCardAnswer|null;
 
 
 }
