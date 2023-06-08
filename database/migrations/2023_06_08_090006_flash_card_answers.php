@@ -12,7 +12,7 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('user_flash_card_answer', function (Blueprint $table) {
+        Schema::create('flash_card_answers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->default(1);
             $table->unsignedBigInteger('flash_card_id');
