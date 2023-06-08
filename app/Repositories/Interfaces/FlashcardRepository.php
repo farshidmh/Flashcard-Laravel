@@ -55,4 +55,10 @@ interface FlashcardRepository
      */
     public function submitFlashCardAnswer($flashCardID, $answer, $status, $userId): void;
 
+    /**
+     * This is the template method for fetching flashcards and user's answers.
+     * @param $userID
+     * @return Collection
+     */
+    public function getFlashCardAndUserAnswers($userID): Collection;
 }

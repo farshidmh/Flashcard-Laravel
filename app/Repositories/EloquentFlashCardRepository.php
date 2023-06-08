@@ -84,4 +84,21 @@ class EloquentFlashCardRepository implements FlashcardRepository
         ]);
 
     }
+
+
+    /**
+     * This is the template method for fetching flashcards and user's answers.
+     * @param $userID
+     * @return Collection
+     */
+    public function getFlashCardAndUserAnswers($userID): Collection
+    {
+        return FlashCard::leftJoin('flash_card_answers', function ($join) use ($userID) {
+            $join->on('flash_cards.id', '=', 'flash_card_answers.flash_card_id')
+                ->where('flash_card_answers.user_id', '=', $userID);
+        })
+            ->select('flash_cards.id', 'flash_cards.question', 'flash_card_answers.status as answer_status')
+            ->orderBy('flash_cards.id')
+            ->get();
+    }
 }
