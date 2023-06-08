@@ -35,7 +35,7 @@ class GetAllFlashcardsCommand extends Command
         foreach ($flashcards as $flashcard) {
             $rows[] = [$flashcard->question, $flashcard->answer, $flashcard->answer_case_sensitive ? 'yes' : 'no'];
         }
-        $this->table(['Question', 'Answer', 'Case Sensitive'], $rows);
+        $this->table([__('flashcards.flashcard_table_question'), __('flashcards.flashcard_table_answer'), __('flashcards.flashcard_table_case_sensitive')], $rows);
 
         return CommandAlias::SUCCESS;
     }
