@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * answer_case_sensitive is a boolean that indicates whether the answer is case-sensitive or not (default is false) when checking the answer.
  *
+ * @version 1.0.0
  */
 class FlashCard extends Model
 {
@@ -25,4 +26,9 @@ class FlashCard extends Model
         'answer_case_sensitive',
         'status',
     ];
+
+    public function userFlashCardAnswers()
+    {
+        return $this->hasMany(FlashCardAnswer::class);
+    }
 }
