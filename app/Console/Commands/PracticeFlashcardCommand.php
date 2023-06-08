@@ -3,11 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Actions\CalculateCompletionPercentageAction;
-use App\Actions\GetAllFlashCards;
 use App\Actions\GetAllFlashCardsAndUsersAnswerAction;
 use App\Actions\GetFlashCardByIdAction;
 use App\Actions\SubmitFlashCardAnswerAction;
-use App\Repositories\Interfaces\FlashcardRepository;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Command\Command as CommandAlias;
 
@@ -75,7 +73,7 @@ class PracticeFlashcardCommand extends Command
             } catch (\Exception $e) {
                 $this->error(__('flashcards.flashcard_not_found'));
             }
-        } while ($this->confirm(__('flashcards.practice_more')));
+        } while ($this->confirm(__('flashcards.practice_more'),true));
 
         return CommandAlias::SUCCESS;
     }
