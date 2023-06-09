@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+  db:
+    image: mariadb:10.6
+    restart: always
+    environment:
+            MYSQL_ROOT_PASSWORD: 'pass'
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_DATABASE: 'flash_card'
+            MYSQL_USER: 'flash'
+            MYSQL_PASSWORD: 'pass'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        ports:
+            - 8080:80
+        environment:
+            PMA_HOST: db
+            PMA_PORT: 3306
+            PMA_USER: 'flash'
+            PMA_PASSWORD: 'pass'
+            PMA_ARBITRARY: 1
