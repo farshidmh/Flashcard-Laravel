@@ -1,20 +1,36 @@
 version: '3.1'
 
 services:
-  db:
-    image: mariadb:10.6
-    restart: always
-    environment:
+
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: flashcard
+
+        environment:
+            DB_HOST: db
+            DB_DATABASE: 'flash_card'
+            DB_USERNAME: 'flash'
+            DB_PASSWORD: 'pass'
+
+        depends_on:
+            - db
+
+    db:
+        image: mariadb:10.6
+        restart: always
+        environment:
             MYSQL_ROOT_PASSWORD: 'pass'
             MYSQL_ROOT_HOST: "%"
             MYSQL_DATABASE: 'flash_card'
             MYSQL_USER: 'flash'
             MYSQL_PASSWORD: 'pass'
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-    ports:
-      - 3306:3306
+        ports:
+          - 3306:3306
 
-  phpmyadmin:
+    phpmyadmin:
         image: phpmyadmin/phpmyadmin
         restart: always
         ports:
@@ -25,3 +41,6 @@ services:
             PMA_USER: 'flash'
             PMA_PASSWORD: 'pass'
             PMA_ARBITRARY: 1
+
+        depends_on:
+            - db
