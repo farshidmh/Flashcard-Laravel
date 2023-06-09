@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Actions\getPercentageFlashcardWithAnswerAction;
-use App\Actions\getPercentageFlashcardWithCorrectAnswerAction;
-use App\Actions\GetAllFlashCardsAndUsersAnswerAction;
+use App\Actions\GetCountAnsweredFlashcardsAction;
+use App\Actions\GetCountCorrectAnsweredFlashcardsAction;
+use App\Actions\CalculatePercentageAction;
 use App\Actions\GetFlashCardCountAction;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Command\Command as CommandAlias;
@@ -33,22 +33,27 @@ class StatsFlashcardCommand extends Command
 
     /**
      * Execute the console command.
+     * Note: Document explicitly mentioned that the formula should be correct flashcards vs total flashcards
+     *
      *
      * @return int
      */
     public function handle(
-        getPercentageFlashcardWithCorrectAnswerAction $calculateCompletionPercentageAction,
-        getPercentageFlashcardWithAnswerAction        $answeredPercentage,
-        GetFlashCardCountAction                       $getFlashCardCountAction,
-        GetAllFlashCardsAndUsersAnswerAction          $getAllFlashCards,
+        CalculatePercentageAction               $calculateCompletionPercentageAction,
+        GetFlashCardCountAction                 $getFlashCardCountAction,
+        GetCountCorrectAnsweredFlashcardsAction $getCountCorrectAnsweredFlashcardsAction,
+        GetCountAnsweredFlashcardsAction        $getCountAnsweredFlashcardsAction,
     )
     {
 
-        $flashcards = $getAllFlashCards->execute($this->userId);
+        $flashcardsCount = $getFlashCardCountAction->execute();
+        $answered = $getCountAnsweredFlashcardsAction->execute($this->userId);
+        $correct = $getCountCorrectAnsweredFlashcardsAction->execute($this->userId);
+
 
         $this->info(__('flashcards.total_questions', ['count' => $getFlashCardCountAction->execute()]));
-        $this->info(__('flashcards.answered_percentage', ['percentage' => $answeredPercentage->execute($flashcards)]));
-        $this->info(__('flashcards.correct_percentage', ['percentage' => $calculateCompletionPercentageAction->execute($flashcards)]));
+        $this->info(__('flashcards.answered_percentage', ['percentage' => $calculateCompletionPercentageAction->execute($flashcardsCount, $answered)]));
+        $this->info(__('flashcards.correct_percentage', ['percentage' => $calculateCompletionPercentageAction->execute($flashcardsCount, $correct)]));
 
         return CommandAlias::SUCCESS;
     }

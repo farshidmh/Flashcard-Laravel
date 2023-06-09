@@ -2,10 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\GetCountCorrectAnsweredFlashcardsAction;
 use App\Actions\GetFlashCardAnswerByUserAction;
-use App\Actions\getPercentageFlashcardWithCorrectAnswerAction;
+use App\Actions\CalculatePercentageAction;
 use App\Actions\GetAllFlashCardsAndUsersAnswerAction;
 use App\Actions\GetFlashCardByIdAction;
+use App\Actions\GetFlashCardCountAction;
 use App\Actions\SubmitFlashCardAnswerAction;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Command\Command as CommandAlias;
@@ -37,16 +39,18 @@ class PracticeFlashcardCommand extends Command
      * @return int
      */
     public function handle(
-        getPercentageFlashcardWithCorrectAnswerAction $calculateCompletionPercentageAction,
-        GetAllFlashCardsAndUsersAnswerAction          $getAllFlashCards,
-        GetFlashCardByIdAction                        $getFlashCardById,
-        SubmitFlashCardAnswerAction                   $submitFlashCardAnswer,
-        GetFlashCardAnswerByUserAction                $getFlashCardAnswerByUserAction,
+        CalculatePercentageAction               $calculateCompletionPercentageAction,
+        GetAllFlashCardsAndUsersAnswerAction    $getAllFlashCards,
+        GetFlashCardByIdAction                  $getFlashCardById,
+        SubmitFlashCardAnswerAction             $submitFlashCardAnswer,
+        GetFlashCardAnswerByUserAction          $getFlashCardAnswerByUserAction,
+        GetFlashCardCountAction                 $getFlashCardCountAction,
+        GetCountCorrectAnsweredFlashcardsAction $getCountCorrectAnsweredFlashcardsAction,
 
     )
     {
         do {
-            $this->displayProgress($calculateCompletionPercentageAction, $getAllFlashCards);
+            $this->displayProgress($calculateCompletionPercentageAction, $getAllFlashCards, $getFlashCardCountAction, $getCountCorrectAnsweredFlashcardsAction);
 
             $this->info(__('flashcards.exit_with_zero'));
 
@@ -75,7 +79,7 @@ class PracticeFlashcardCommand extends Command
                     $this->error(__('flashcards.incorrect_answer'));
                 }
 
-                $this->displayProgress($calculateCompletionPercentageAction, $getAllFlashCards);
+                $this->displayProgress($calculateCompletionPercentageAction, $getAllFlashCards, $getFlashCardCountAction, $getCountCorrectAnsweredFlashcardsAction);
                 $this->line('================');
             } catch (\Exception $e) {
                 $this->error(__('flashcards.flashcard_not_found'));
@@ -85,7 +89,16 @@ class PracticeFlashcardCommand extends Command
         return CommandAlias::SUCCESS;
     }
 
-    private function displayProgress($calculateCompletionPercentageAction, $getAllFlashCards): void
+    /**
+     * This is the method for displaying the progress of the user.
+     * Note: Document explicitly mentioned that the formula should be correct flashcards vs total flashcards
+     * @param $calculateCompletionPercentageAction
+     * @param $getAllFlashCards
+     * @param $getFlashCardCountAction
+     * @param $getCountCorrectAnsweredFlashcardsAction
+     * @return void
+     */
+    private function displayProgress($calculateCompletionPercentageAction, $getAllFlashCards, $getFlashCardCountAction, $getCountCorrectAnsweredFlashcardsAction): void
     {
         $flashcards = $getAllFlashCards->execute($this->userId);
 
@@ -114,7 +127,11 @@ class PracticeFlashcardCommand extends Command
             ];
         }
 
-        $completionPercentage = $calculateCompletionPercentageAction->execute($flashcards);
+        $flashcardsCount = $getFlashCardCountAction->execute();
+        $correct = $getCountCorrectAnsweredFlashcardsAction->execute($this->userId);
+
+
+        $completionPercentage = $calculateCompletionPercentageAction->execute($flashcardsCount, $correct);
 
         $this->table($headers, $rows);
 
